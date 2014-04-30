@@ -1,0 +1,33 @@
+{
+  "name": "gp-task-widget",
+  "version": "0.0.1",
+  "description": "A set of dojo widgets for dynamically building user interfaces to consume Esri GPTasks",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {
+    "express": "~4.1.1",
+    "request": "~2.34.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JimBlaney/gp-task-widget.git"
+  },
+  "keywords": [
+    "gptask",
+    "gpserver",
+    "arcgis",
+    "esri",
+    "dijit",
+    "dojo"
+  ],
+  "author": "Jim Blaney (jblaney@esri.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JimBlaney/gp-task-widget/issues"
+  },
+  "homepage": "https://github.com/JimBlaney/gp-task-widget"
+}
