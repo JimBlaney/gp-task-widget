@@ -2,18 +2,20 @@ define([
   "dojo/_base/declare",
   "dojo/_base/lang",
   "dojo/dom-attr",
+  "dojo/dom-class",
   "dojo/dom-construct",
-  "dojo/topic",
-  "dojo/Deferred",
+  "dojo/on",
+  "esri/toolbars/draw",
   "./_GPParameter",
   "dojo/text!./templates/_GPFeatureRecordSetLayer.html"
 ], function(
   declare,
   lang,
   domAttr,
+  domClass,
   domConstruct,
-  topic,
-  Deferred,
+  on,
+  Draw,
   _GPParameter,
   template
 ) {
@@ -26,30 +28,61 @@ define([
 
     templateString: template,
 
+    baseClass: "gp-feature-rs-layer",
+
     _deferred: null,
+
+    _toolbar: null,
+
+    _drawEndHandle: null,
+
+    _geoms: null,
+
+    startup: function() {
+      this.inherited(arguments);
+
+      this._geoms = [];
+
+      this._toolbar = new Draw(this.map);
+
+    },
 
     _doGeomCapture: function() {
 
-      if (this._deferred !== null) {
-        return;
+      if (domClass.contains(this.actionNode, "checked")) {
+        
+        this._drawEndHandle.remove();
+        this._toolbar.deactivate();
+        this.map.setMapCursor("default");
+        domClass.remove(this.actionNode, "checked");
+
+      } else {
+
+        domClass.add(this.actionNode, "checked");
+
+        var geomType = this.defaultValue.geometryType.toLowerCase().replace("esrigeometry", "");
+
+        this._toolbar.activate(geomType);
+        this.map.setMapCursor("crosshair");
+
+        this._drawEndHandle = on(this._toolbar, "draw-end", lang.hitch(this, function(e) {
+
+          this._drawEndHandle.remove();
+          this._toolbar.deactivate();
+          this.map.setMapCursor("default");
+          domClass.remove(this.actionNode, "checked");
+
+          this._geoms.push(e.geometry);
+
+          var geomLabel = geomType.substring(0, 1).toUpperCase() + geomType.substring(1);
+
+          domConstruct.create("li", {
+            innerHTML: geomLabel + " " + this._geoms.length
+          }, this.geometryListNode);
+
+        }));
+
       }
-
-      this._deferred = new Deferred();
-
-      topic.publish("gp.action.geometry", {
-        geometryType: "point",
-        deferred: this._deferred
-      });
-
-      this._deferred.then(lang.hitch(this, function(e) {
-
-        domConstruct.create("li", {
-          innerHTML: e.geometry.x + ", " + e.geometry.y
-        }, this.geometryListNode);
-
-        this._deferred = null;
-
-      }));
 
     }
 

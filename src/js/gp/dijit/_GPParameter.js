@@ -18,6 +18,10 @@ define([
 
     templateString: "<div></div>",
 
+    baseClass: "gp-parameter-input",
+
+    map: null,
+
     choiceList: null,
 
     defaultValue: null,

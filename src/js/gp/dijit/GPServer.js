@@ -27,11 +27,26 @@ define([
 ) {
   "option strict";
 
+  (function() {
+    var e = document.createElement("link");
+    e.rel = "stylesheet";
+    e.href = require.toUrl("gp/dijit/styles/GPServer.css");
+    document.getElementsByTagName("head")[0].appendChild(e);
+  })();
+
   var GPServer = declare([ _WidgetBase, _TemplatedMixin ], {
 
     templateString: template,
 
+    baseClass: "gp-server",
+
+    loadingImage: require.toUrl("gp/dijit/images/loading.gif"),
+
     url: null,
+
+    map: null,
+
+    label: "Tasks",
 
     _resource: null,
 
@@ -43,6 +58,8 @@ define([
       this._getResource().then(lang.hitch(this, function(resource) {
         
         this._resource = resource;
+
+        domConstruct.empty(this.containerNode);
 
         domAttr.set(this.selectNode, "size", this._resource.tasks.length + 1);
 
@@ -103,7 +120,7 @@ define([
 
         this._gpTask = new GPTask({
           url: url,
-          taskName: label
+          map: this.map
         }, domConstruct.create("div", {}, this.containerNode));
         this._gpTask.startup();
 

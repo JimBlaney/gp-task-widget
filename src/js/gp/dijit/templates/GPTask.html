@@ -1,9 +1,13 @@
-<div class="gp-task clearfix">
-  <div class="gp-task-name" data-dojo-attach-point="displayNameNode"></div>
-  <div class="gp-task-input-pane" data-dojo-attach-point="containerNode"></div>
-  <div class="gp-task-action-pane form-group text-right clearfix col-sm-12">
-    <button class="btn btn-link gp-task-help-button" data-dojo-attach-event="click: _doHelp"><i class="fa fa-question-circle fa-lg"></i></button>
-    <button class="btn btn-primary gp-task-execute-button" data-dojo-attach-event="click: _doExecute">Execute</button>
-    <button class="btn btn-link gp-task-cancel-button" data-dojo-attach-event="click: _doCancel">Cancel</button>
+<div>
+  <div class="item-label" data-dojo-attach-point="displayNameNode"></div>
+  <div class="task-parameters" data-dojo-attach-point="containerNode">
+    <div class="gp-loading">
+      <img src="${loadingImage}" alt="Loading..." />
+    </div>
+  </div>
+  <div class="task-actions">
+    <button class="task-action task-action-help" data-dojo-attach-event="click: _doHelp"><i class="fa fa-question-circle fa-lg"></i></button>
+    <button class="task-action task-action-execute" data-dojo-attach-event="click: _doExecute">Execute</button>
+    <button class="task-action task-action-cancel" data-dojo-attach-event="click: _doCancel">Cancel</button>
   </div>
 </div>

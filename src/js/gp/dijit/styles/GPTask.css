@@ -1,0 +1,111 @@
+.gp-task {
+}
+
+.gp-task select:empty {
+  display: none;
+}
+
+.gp-task .item-label {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.gp-task .task-parameters { }
+
+.gp-loading {
+  text-align: center;
+}
+
+.gp-task .task-actions {
+  text-align: right;
+  margin-top: 15px;
+}
+
+.gp-task .task-action { }
+.gp-task .task-action-help { }
+.gp-task .task-action-execute { }
+.gp-task .task-action-cancel { display: none; }
+
+.gp-task .gp-control {
+  margin: 0;
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  box-sizing: border-box;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  -webkit-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+  transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.gp-parameter,
+.gp-parameter-input {
+  display: inline-block;
+  width: 100%;
+}
+
+.gp-parameter + .gp-parameter {
+  margin-top: 8px;
+}
+
+.gp-parameter .item-label {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+/* GPLinearUnit */
+.gp-parameter .gp-control.lu-distance {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  text-align: right;
+  width: 75%;
+  float: left;
+}
+
+.gp-parameter .gp-control.lu-units {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 0;
+  width: 25%;
+  float: left;
+}
+
+/* GPFeatureRecordSetLayer */
+.gp-parameter .gp-control.lu-units:after {
+  clear: both;
+}
+
+.gp-parameter .gp-control.frsl-list {
+  list-style-type: none;
+  margin: 0;
+  height: auto;
+  min-height: 34px;
+  width: 75%;
+  float: left;
+  border-top-right-radius: 0;
+}
+
+.gp-parameter .gp-control.frsl-action { 
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 0;
+  width: 25%;
+  float: left;
+}
+
+.gp-parameter .gp-control.frsl-action.checked {
+  color: #fff;
+  background-color: #333;
+}
+
+.gp-parameter .gp-control.frsl-action:after {
+  clear: both;
+}

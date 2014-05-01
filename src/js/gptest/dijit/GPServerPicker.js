@@ -23,9 +23,22 @@ define([
 ) {
   "option strict";
 
+  (function() {
+    var e = document.createElement("link");
+    e.rel = "stylesheet";
+    e.href = require.toUrl("gptest/dijit/styles/GPServerPicker.css");
+    document.getElementsByTagName("head")[0].appendChild(e);
+  })();
+
   var GPServerPicker = declare([ _WidgetBase, _TemplatedMixin ], {
 
     templateString: template,
+
+    baseClass: "gp-server-picker",
+
+    map: null,
+
+    label: "Servers",
 
     _gpServer: null,
 
@@ -73,8 +86,11 @@ define([
 
       require(["gp/dijit/GPServer"], lang.hitch(this, function(GPServer) {
 
+        domConstruct.empty(this.containerNode);
+
         this._gpServer = new GPServer({
-          url: value
+          url: value,
+          map: this.map
         }, domConstruct.create("div", {}, this.containerNode));
         this._gpServer.startup();
 

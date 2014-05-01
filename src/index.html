@@ -17,14 +17,6 @@
         width: 100%; height: 100%;
       }
 
-      select:empty {
-        display: none;
-      }
-
-      .gp-task-name {
-        font-weight: bold;
-      }
-
     </style>
     
   </head>
@@ -40,7 +32,9 @@
       </div>
 
       <div class="col-sm-4">
-        <div data-dojo-type="gptest/dijit/GPServerPicker"></div>
+        <div data-dojo-type="gptest/dijit/GPServerPicker" data-dojo-props="id:'serverPicker'"></div>
+        <!-- hr />
+        <div data-dojo-type="gp/dijit/GPtask" data-dojo-props="url: 'http://sampleserver1.arcgisonline.com/ArcGIS/rest/services/Elevation/ESRI_Elevation_World/GPServer/Viewshed'"></div -->
       </div>
 
       <div class="col-sm-8">
@@ -49,13 +43,10 @@
 
     </div>
     
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    
     <script>
       var dojoConfig = {
         async: true,
-        parseOnLoad: true,
+        parseOnLoad: false,
         packages: [
           {
             name: "gp",
@@ -73,39 +64,23 @@
 
     <script>
       require([
+        "dojo/parser",
         "esri/map",
-        "esri/toolbars/draw",
-        "dojo/on",
-        "dojo/topic"
+        "dijit/registry",
+        "dojo/domReady!"
       ], function(
+        parser,
         Map,
-        Draw,
-        on,
-        topic
+        registry
       ) {
 
-        var map = new Map("map", {
-          basemap: "gray"
-        });
+        parser.parse().then(function() {
 
-        var toolbar = new Draw(map);
-
-        topic.subscribe("gp.action.geometry", function(e) {
-
-          console.log("CAPTURING GEOMETRY");
-
-          // TODO: explicit resolution of the geometryType
-          toolbar.activate(Draw.POINT);
-
-          var mapClickHandle = on(toolbar, "draw-end", function(ee) {
-
-            mapClickHandle.remove();
-
-            if (!!e.deferred) {
-              e.deferred.resolve(ee);
-            }
-
+          var map = new Map("map", {
+            basemap: "gray"
           });
+
+          registry.byId("serverPicker").set("map", map);
 
         });
 

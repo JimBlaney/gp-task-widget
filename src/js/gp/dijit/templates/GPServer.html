@@ -1,7 +1,9 @@
 <div>
-  <div>GPTasks:</div>
-  <div class="form-group">
-    <select class="form-control" data-dojo-attach-point="selectNode" data-dojo-attach-event="change: _onChange"></select>
+  <div class="item-label">${label}</div>
+  <select class="gp-control" data-dojo-attach-point="selectNode" data-dojo-attach-event="change: _onChange"></select>
+  <div class="item-container" data-dojo-attach-point="containerNode">
+    <div class="gp-loading">
+      <img src="${loadingImage}" alt="Loading..." />
+    </div>
   </div>
-  <div data-dojo-attach-point="containerNode"></div>
 </div>

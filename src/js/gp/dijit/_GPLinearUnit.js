@@ -20,6 +20,8 @@ define([
 
     templateString: template,
 
+    "class": "gp-linear-unit",
+
     startup: function() {
 
       domAttr.set(this.inputNode, "value", this.defaultValue.distance);

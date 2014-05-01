@@ -41,6 +41,10 @@ define([
 
     templateString: template,
 
+    baseClass: "gp-parameter",
+
+    map: null,
+
     category: null,
 
     choiceList: null,    
@@ -53,9 +57,18 @@ define([
 
     displayName: null,
 
+    label: null,
+
     name: null,
 
     parameterType: null,
+
+    postMixinProperties: function() {
+      this.inherited(arguments);
+
+      this.set("label", this.get("displayName"));
+
+    },
 
     startup: function() {
       this.inherited(arguments);
@@ -64,7 +77,8 @@ define([
 
         this._control = new Control({
           choiceList: this.choiceList,
-          defaultValue: this.defaultValue
+          defaultValue: this.defaultValue,
+          map: this.map
         }, this.controlNode);
         this._control.startup();
 
@@ -79,6 +93,12 @@ define([
       } else {
         return true;
       }
+
+    },
+
+    _getLabelAttr: function() {
+
+      return this.get("displayName");
 
     }
 
