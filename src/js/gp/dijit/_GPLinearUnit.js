@@ -25,8 +25,16 @@ define([
     startup: function() {
 
       domAttr.set(this.inputNode, "value", this.defaultValue.distance);
+      domAttr.set(this.selectNode, "value", this.defaultValue.units);
 
-      // TODO: units
+    },
+
+    _getValueAttr: function() {
+
+      return {
+        distance: domAttr.get(this.inputNode, "value"),
+        units: domAttr.get(this.selectNode, "value"),
+      };
 
     }
 

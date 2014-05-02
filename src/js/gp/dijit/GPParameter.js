@@ -1,12 +1,14 @@
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
+  "dojo/json",
   "dijit/_WidgetBase",
   "dijit/_TemplatedMixin",
   "dojo/text!./templates/GPParameter.html"
 ], function(
   declare,
   lang,
+  JSON,
   _WidgetBase,
   _TemplatedMixin,
   template
@@ -47,7 +49,7 @@ define([
 
     category: null,
 
-    choiceList: null,    
+    choiceList: null,
 
     dataType: null,
 
@@ -99,6 +101,12 @@ define([
     _getLabelAttr: function() {
 
       return this.get("displayName");
+
+    },
+
+    _getValueAttr: function() {
+
+      return JSON.stringify(this._control.get("value"));
 
     }
 
